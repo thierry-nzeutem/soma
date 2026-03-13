@@ -193,8 +193,10 @@ class ApiConstants {
 
   // ── Subscription & Entitlements (V2) ──────────────────────────────────────
   static const String meEntitlements = '$apiPrefix/me/entitlements';
-  static const String billingCheckout = '$apiPrefix/billing/checkout';
-  static const String billingPortal = '$apiPrefix/billing/portal';
+  // billingCheckout and billingPortal are intentionally OMITTED from Flutter.
+  // These endpoints may only be called from the web (Next.js) or Android.
+  // iOS must NEVER call POST /billing/checkout or GET /billing/portal.
+  // See BillingContext.canShowCheckout / canShowUpgradeCTA for capability gates.
 
   // ── Timeouts ──────────────────────────────────────────────────────────────
   static const Duration connectTimeout = Duration(seconds: 10);

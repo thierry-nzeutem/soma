@@ -4,12 +4,18 @@
 ///   - Injection du header Authorization sur chaque requête
 ///   - Refresh automatique sur 401 (token expiré)
 ///   - Redirection vers /login si refresh échoue
+///
+/// Compliance App Store :
+///   - Injecte X-Client-Platform: ios|android|web sur chaque requête.
+///   - Le backend rejette POST /billing/checkout et GET /billing/portal
+///     lorsque ce header vaut "ios".
 library;
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../auth/token_storage.dart';
+import '../billing/billing_context.dart';
 import 'api_constants.dart';
 
 // ── Provider Riverpod ─────────────────────────────────────────────────────────
@@ -106,6 +112,9 @@ class _AuthInterceptor extends Interceptor {
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
     }
+    // App Store compliance: always declare the client platform so the backend
+    // can enforce its iOS billing restrictions server-side.
+    options.headers['X-Client-Platform'] = BillingContext.current().headerValue;
     handler.next(options);
   }
 
