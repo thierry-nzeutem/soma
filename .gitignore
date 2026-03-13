@@ -58,3 +58,14 @@ htmlcov/
 
 # Claude internal
 .claude/
+
+# Temp injection artifacts (base64 chunking for Supabase migrations)
+backend/batch_*.txt
+backend/chunk_*.txt
+backend/chunks_*.txt
+backend/inject_*.js
+backend/b64p*.txt
+backend/sql_b64*.txt
+backend/mini_chunks.json
+backend/sql_for_inject.json
+backend/cors_server.py
