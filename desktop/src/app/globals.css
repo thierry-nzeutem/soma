@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ── Light mode (default) ────────────────────────────────────────────────── */
+  :root {
+    --radius: 0.5rem;
+    --background: #FFFFFF;
+    --foreground: #1C1C1E;
+    --surface: #F5F5F7;
+    --border: #E5E5EA;
+    --accent: #00E5A0;
+    --muted: #8E8E93;
+    --warning: #FF9500;
+    --danger: #FF3B30;
+    --success: #34C759;
+    /* SOMA-prefixed CSS variables for inline style usage */
+    --soma-bg: #FFFFFF;
+    --soma-surface: #F5F5F7;
+    --soma-surface-variant: #EEEEF0;
+    --soma-border: #E5E5EA;
+    --soma-accent: #00E5A0;
+    --soma-text: #1C1C1E;
+    --soma-text-secondary: #636366;
+    --soma-muted: #8E8E93;
+    --soma-warning: #FF9500;
+    --soma-danger: #FF3B30;
+    --soma-success: #34C759;
+    --soma-nav-bg: #F8F8FA;
+    --soma-card-bg: #FFFFFF;
+    --soma-scrollbar-track: #F5F5F7;
+    --soma-scrollbar-thumb: #D1D1D6;
+    --soma-scrollbar-thumb-hover: #AEAEB2;
+    color-scheme: light;
+  }
+
+  /* ── Dark mode ───────────────────────────────────────────────────────────── */
+  .dark {
+    --background: #0A0A0A;
+    --foreground: #FFFFFF;
+    --surface: #141414;
+    --border: #1E1E1E;
+    --accent: #00E5A0;
+    --muted: #888888;
+    --warning: #FF9500;
+    --danger: #FF3B30;
+    --success: #34C759;
+    --soma-bg: #0A0A0A;
+    --soma-surface: #141414;
+    --soma-surface-variant: #1A1A1A;
+    --soma-border: #1E1E1E;
+    --soma-accent: #00E5A0;
+    --soma-text: #FFFFFF;
+    --soma-text-secondary: #888888;
+    --soma-muted: #888888;
+    --soma-warning: #FF9500;
+    --soma-danger: #FF3B30;
+    --soma-success: #34C759;
+    --soma-nav-bg: #0D0D0D;
+    --soma-card-bg: #141414;
+    --soma-scrollbar-track: #0A0A0A;
+    --soma-scrollbar-thumb: #2A2A2A;
+    --soma-scrollbar-thumb-hover: #3A3A3A;
+    color-scheme: dark;
+  }
+
+  * {
+    border-color: var(--soma-border);
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: light dark;
+  }
+
+  body {
+    background-color: var(--soma-bg);
+    color: var(--soma-text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden; /* Desktop app — no page scroll */
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--soma-scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--soma-scrollbar-thumb);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--soma-scrollbar-thumb-hover);
+  }
+}
+
+@layer utilities {
+  /* Text gradient accent */
+  .text-gradient-accent {
+    background: linear-gradient(135deg, #00E5A0 0%, #00B4D8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow effect for accent elements */
+  .glow-accent {
+    box-shadow: 0 0 20px rgba(0, 229, 160, 0.15);
+  }
+
+  /* Surface card */
+  .card-surface {
+    background-color: var(--soma-card-bg);
+    border: 1px solid var(--soma-border);
+    border-radius: 0.75rem;
+  }
+
+  /* Full height minus topbar */
+  .h-content {
+    height: calc(100vh - 56px);
+  }
+
+  /* Safe area padding for iPhone notch */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}

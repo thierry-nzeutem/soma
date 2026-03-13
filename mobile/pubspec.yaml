@@ -1,0 +1,58 @@
+name: soma_mobile
+description: SOMA — Personal Health Intelligence — Application mobile Flutter.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+
+  # État & DI
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # Navigation
+  go_router: ^13.2.0
+
+  # HTTP
+  dio: ^5.4.0
+
+  # Graphiques
+  fl_chart: ^0.67.0
+
+  # Stockage local
+  shared_preferences: ^2.2.3
+
+  # UI helpers
+  cupertino_icons: ^1.0.6
+
+  # Sélecteur d'images (photo repas)
+  image_picker: ^1.1.2
+
+  # Offline & Connectivity — LOT 12
+  connectivity_plus: ^6.0.2               # détection réseau (wifi/mobile/none)
+  flutter_local_notifications: ^17.2.2    # notifications locales planifiées
+
+  # Computer Vision — LOT 7
+  camera: ^0.10.6                          # stream caméra temps réel
+  google_mlkit_pose_detection: ^0.11.0     # détection squelette on-device
+  permission_handler: ^11.3.0              # permissions caméra runtime
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  riverpod_generator: ^2.4.0
+  build_runner: ^2.4.9
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/images/

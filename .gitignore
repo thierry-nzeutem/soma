@@ -1,0 +1,60 @@
+# Python / Backend
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+build/
+dist/
+*.egg-info/
+.env
+.env.*
+!backend/.env.example
+venv/
+.venv/
+env/
+*.sqlite3
+*.db
+backend/data/uploads/
+
+# Node / Desktop
+desktop/node_modules/
+desktop/.next/
+desktop/*.tsbuildinfo
+desktop/.turbo/
+
+# Flutter / Mobile
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/build/
+mobile/*.iml
+mobile/.idea/
+mobile/.gradle/
+mobile/local.properties
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+
+# Secrets
+*.pem
+*.key
+*.cert
+secrets/
+
+# Logs / Cache
+*.log
+logs/
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Claude internal
+.claude/
