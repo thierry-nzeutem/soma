@@ -203,6 +203,12 @@ class ApiConstants {
   static const String appleVerify = '$apiPrefix/billing/apple/verify';
   static const String appleRestore = '$apiPrefix/billing/apple/restore';
 
+  // ── Coach Platform (Phase 1) ─────────────────────────────────────────────
+  static const coachInvitations = '$apiPrefix/coach-platform/invitations';
+  static const coachInvitationsAccept = '$apiPrefix/coach-platform/invitations/accept';
+  static const coachAthleteBase = '$apiPrefix/coach-platform/athlete';
+  static const coachRecommendations = '$apiPrefix/coach-platform/recommendations';
+
   // ── Timeouts ──────────────────────────────────────────────────────────────
   static const Duration connectTimeout = Duration(seconds: 10);
   static const Duration receiveTimeout = Duration(seconds: 30);

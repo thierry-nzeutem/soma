@@ -24,6 +24,9 @@ _FEATURE_MIN_PLAN: dict[FeatureCode, PlanCode] = {
     FeatureCode.BIOMECHANICS_VISION: PlanCode.PERFORMANCE,
     FeatureCode.ADVANCED_VO2MAX: PlanCode.PERFORMANCE,
     FeatureCode.TRAINING_LOAD: PlanCode.PERFORMANCE,
+    FeatureCode.COACH_MODULE: PlanCode.AI,
+    FeatureCode.COACH_ADVANCED_ANALYSIS: PlanCode.PERFORMANCE,
+    FeatureCode.COACH_REPORTS: PlanCode.AI,
 }
 
 # Matrice plan -> set de features incluses
@@ -43,6 +46,8 @@ PLAN_FEATURES: dict[PlanCode, set[FeatureCode]] = {
         FeatureCode.PDF_REPORTS,
         FeatureCode.ANOMALY_DETECTION,
         FeatureCode.BIOLOGICAL_AGE,
+        FeatureCode.COACH_MODULE,
+        FeatureCode.COACH_REPORTS,
     },
     PlanCode.PERFORMANCE: {
         FeatureCode.BASIC_DASHBOARD,
@@ -59,6 +64,9 @@ PLAN_FEATURES: dict[PlanCode, set[FeatureCode]] = {
         FeatureCode.BIOMECHANICS_VISION,
         FeatureCode.ADVANCED_VO2MAX,
         FeatureCode.TRAINING_LOAD,
+        FeatureCode.COACH_MODULE,
+        FeatureCode.COACH_REPORTS,
+        FeatureCode.COACH_ADVANCED_ANALYSIS,
     },
 }
 

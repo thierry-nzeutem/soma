@@ -26,3 +26,8 @@ class FeatureCode(str, Enum):
     BIOMECHANICS_VISION = "biomechanics_vision"
     ADVANCED_VO2MAX = "advanced_vo2max"
     TRAINING_LOAD = "training_load"
+
+    # Coach Module (human coaching platform)
+    COACH_MODULE = "coach_module"
+    COACH_ADVANCED_ANALYSIS = "coach_advanced_analysis"
+    COACH_REPORTS = "coach_reports"

@@ -16,6 +16,7 @@ class User(Base, UUIDMixin, TimestampMixin):
     hashed_password: Mapped[str] = mapped_column(String(255), nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     is_superuser: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False, server_default="false")
+    is_coach: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False, server_default="false")
 
     # ── Subscription plan ─────────────────────────────────────────────
     plan_code: Mapped[str] = mapped_column(String(20), nullable=False, server_default="free", index=True)
@@ -23,6 +24,8 @@ class User(Base, UUIDMixin, TimestampMixin):
     billing_provider: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
     stripe_customer_id: Mapped[Optional[str]] = mapped_column(String(255), nullable=True, index=True)
     stripe_subscription_id: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    apple_original_transaction_id: Mapped[Optional[str]] = mapped_column(String(255), nullable=True, unique=True, index=True)
+    apple_subscription_group_id: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     plan_started_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     plan_expires_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     trial_ends_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)

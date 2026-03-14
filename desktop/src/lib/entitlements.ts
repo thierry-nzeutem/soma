@@ -19,6 +19,11 @@ export const FeatureCode = {
   BIOMECHANICS_VISION: 'biomechanics_vision',
   ADVANCED_VO2MAX: 'advanced_vo2max',
   TRAINING_LOAD: 'training_load',
+
+  // Coach Module (human coaching platform)
+  COACH_MODULE: 'coach_module',
+  COACH_ADVANCED_ANALYSIS: 'coach_advanced_analysis',
+  COACH_REPORTS: 'coach_reports',
 } as const;
 
 export type FeatureCodeType = typeof FeatureCode[keyof typeof FeatureCode];
@@ -48,6 +53,7 @@ export function getRequiredPlan(feature: string): 'ai' | 'performance' {
     FeatureCode.BIOMECHANICS_VISION,
     FeatureCode.ADVANCED_VO2MAX,
     FeatureCode.TRAINING_LOAD,
+    FeatureCode.COACH_ADVANCED_ANALYSIS,
   ]);
   return performanceFeatures.has(feature) ? 'performance' : 'ai';
 }

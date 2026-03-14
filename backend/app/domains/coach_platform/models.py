@@ -78,6 +78,11 @@ class CoachAthleteLinkDB(Base, UUIDMixin, TimestampMixin):
     role: Mapped[str] = mapped_column(String(50), nullable=False, server_default="primary")
     # primary | secondary | observer
     linked_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
+    status: Mapped[str] = mapped_column(
+        String(20), nullable=False, server_default="active"
+    )
+    # invited | active | paused | archived | revoked
+    relationship_notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     __table_args__ = (
         UniqueConstraint("coach_id", "athlete_id", name="uq_coach_athlete_link"),
@@ -150,4 +155,77 @@ class AthleteAlertDB(Base, UUIDMixin, TimestampMixin):
 
     __table_args__ = (
         Index("ix_athlete_alerts_coach_athlete", "coach_id", "athlete_id"),
+    )
+
+
+class CoachInvitationDB(Base, UUIDMixin):
+    """
+    Coach invitation. A coach creates an invite link/code for a potential athlete.
+    The athlete accepts the invite to establish the coach-athlete relationship.
+    """
+    __tablename__ = "coach_invitations"
+
+    coach_profile_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), nullable=False, index=True
+    )
+    invite_code: Mapped[str] = mapped_column(String(12), nullable=False, unique=True)
+    invite_token: Mapped[str] = mapped_column(String(64), nullable=False, unique=True)
+    invitee_email: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    invitee_user_id: Mapped[Optional[uuid.UUID]] = mapped_column(
+        UUID(as_uuid=True), nullable=True
+    )
+    status: Mapped[str] = mapped_column(
+        String(20), nullable=False, server_default="pending"
+    )
+    # pending | accepted | expired | cancelled
+    message: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    accepted_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default="now()"
+    )
+
+    __table_args__ = (
+        Index("ix_coach_inv_token", "invite_token"),
+        Index("ix_coach_inv_code", "invite_code"),
+    )
+
+
+class CoachRecommendationDB(Base, UUIDMixin, TimestampMixin):
+    """
+    Coach recommendation for an athlete.
+    Distinct from notes: recommendations have type, priority, status tracking.
+    """
+    __tablename__ = "coach_recommendations"
+
+    coach_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), nullable=False, index=True
+    )
+    athlete_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), nullable=False, index=True
+    )
+    rec_type: Mapped[str] = mapped_column(
+        String(50), nullable=False, server_default="general"
+    )
+    # training | nutrition | recovery | medical | lifestyle | mental | general
+    priority: Mapped[str] = mapped_column(
+        String(20), nullable=False, server_default="normal"
+    )
+    # low | normal | high | urgent
+    status: Mapped[str] = mapped_column(
+        String(20), nullable=False, server_default="pending"
+    )
+    # pending | in_progress | completed | dismissed
+    title: Mapped[str] = mapped_column(String(200), nullable=False)
+    description: Mapped[str] = mapped_column(Text, nullable=False)
+    target_date: Mapped[Optional[date]] = mapped_column(Date, nullable=True)
+    completed_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+
+    __table_args__ = (
+        Index("ix_coach_rec_coach_athlete", "coach_id", "athlete_id"),
+        Index("ix_coach_rec_status", "athlete_id", "status"),
     )

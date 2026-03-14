@@ -48,6 +48,7 @@ from app.domains.biomarkers.endpoints import biomarkers_router
 
 # ── LOT 14 : Coach Pro / Multi-Athletes Platform ───────────────────────────────
 from app.domains.coach_platform.endpoints import coach_platform_router
+from app.domains.coach_platform.invitation_endpoints import coach_invite_router
 
 api_router = APIRouter(prefix="/api/v1")
 
@@ -113,6 +114,7 @@ api_router.include_router(biomarkers_router)         # POST /labs/result, GET /l
 
 # ── LOT 14 : Coach Pro / Multi-Athletes Platform ───────────────────────────────
 api_router.include_router(coach_platform_router)     # POST /coach-platform/coach/register, GET /coach-platform/athletes, etc.
+api_router.include_router(coach_invite_router)     # Phase 1: invitations, recommendations, full profile
 
 # ── LOT 18 : Productization & Daily Experience Engine ─────────────────────────
 api_router.include_router(daily_router)              # GET /daily/briefing

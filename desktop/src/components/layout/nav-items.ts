@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   Trophy,
   UserCircle,
+  Users,
   Utensils,
   Zap,
 } from 'lucide-react';
@@ -98,6 +99,12 @@ export const NAV_ITEMS: NavItem[] = [
     descKey: 'nav.coachDesc',
     href: '/coach',
     icon: Bot,
+  },
+  {
+    labelKey: 'nav.coachPlatform',
+    descKey: 'nav.coachPlatformDesc',
+    href: '/coach-platform',
+    icon: Users,
   },
   {
     labelKey: 'nav.analytics',

@@ -20,6 +20,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.session import get_db
 from app.models.user import User
 from app.core.deps import get_current_user
+from app.core.entitlements import require_feature
+from app.core.features import FeatureCode
 
 from .models import (
     CoachProfileDB,
@@ -238,7 +240,7 @@ async def _load_athlete_metrics(
 async def register_coach(
     coach_data: CoachProfileCreate,
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_feature(FeatureCode.COACH_MODULE)),
 ):
     """Register current user as a coach."""
     existing = await _get_coach_db(db, current_user.id)
@@ -275,7 +277,7 @@ async def register_coach(
 @coach_platform_router.get("/coach/profile", response_model=CoachProfileResponse)
 async def get_coach_profile(
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_feature(FeatureCode.COACH_MODULE)),
 ):
     """Get current user coach profile."""
     coach_db = await _get_coach_db(db, current_user.id)
@@ -301,7 +303,7 @@ async def get_coach_profile(
 @coach_platform_router.get("/athletes", response_model=CoachAthletesOverviewResponse)
 async def get_coach_athletes(
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_feature(FeatureCode.COACH_MODULE)),
 ):
     """Get overview of all athletes managed by this coach."""
     coach_db = await _get_coach_db(db, current_user.id)
@@ -313,7 +315,7 @@ async def get_coach_athletes(
 @coach_platform_router.get("/dashboard", response_model=CoachAthletesOverviewResponse)
 async def get_coach_dashboard(
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_feature(FeatureCode.COACH_MODULE)),
 ):
     """
     Coach dashboard aggregator.
@@ -332,7 +334,7 @@ async def get_coach_dashboard(
 async def add_athlete(
     athlete_data: AthleteCreate,
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_feature(FeatureCode.COACH_MODULE)),
 ):
     """Add an athlete to the coach roster."""
     coach_db = await _get_coach_db(db, current_user.id)
@@ -384,7 +386,7 @@ async def add_athlete(
 async def get_athlete_dashboard(
     athlete_id: str,
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_feature(FeatureCode.COACH_MODULE)),
 ):
     """Get detailed dashboard for a specific athlete."""
     coach_db = await _get_coach_db(db, current_user.id)
@@ -440,7 +442,7 @@ async def get_athlete_dashboard(
 async def create_training_program(
     program_data: TrainingProgramCreate,
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_feature(FeatureCode.COACH_MODULE)),
 ):
     """Create a training program."""
     coach_db = await _get_coach_db(db, current_user.id)
@@ -482,7 +484,7 @@ async def create_training_program(
 @coach_platform_router.get("/programs", response_model=list[TrainingProgramResponse])
 async def get_coach_programs(
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_feature(FeatureCode.COACH_MODULE)),
 ):
     """Get all training programs created by this coach."""
     coach_db = await _get_coach_db(db, current_user.id)
@@ -516,7 +518,7 @@ async def get_coach_programs(
 async def add_athlete_note(
     note_data: AthleteNoteCreate,
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_feature(FeatureCode.COACH_MODULE)),
 ):
     """Add a note for an athlete."""
     coach_db = await _get_coach_db(db, current_user.id)
@@ -556,7 +558,7 @@ async def add_athlete_note(
 async def get_athlete_notes(
     athlete_id: str,
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+    current_user: User = Depends(require_feature(FeatureCode.COACH_MODULE)),
 ):
     """Get all notes for an athlete (from the requesting coach)."""
     coach_db = await _get_coach_db(db, current_user.id)
