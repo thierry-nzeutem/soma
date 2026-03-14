@@ -72,7 +72,18 @@ class BillingContext {
   /// which triggers server-side protection on checkout/portal endpoints.
   bool get isIos => platform == BillingPlatform.ios;
 
-  /// Convenience: platform name for the `X-Client-Platform` HTTP header.
+  /// Whether this platform supports native In-App Purchase (StoreKit 2).
+  /// Only true on iOS. Android uses Stripe web checkout.
+  bool get canShowNativePurchase => platform == BillingPlatform.ios;
+
+  /// Whether to show the "Restore Purchases" button.
+  /// Apple App Store guidelines require this on iOS.
+  bool get canShowRestorePurchases => platform == BillingPlatform.ios;
+
+  /// Whether this platform should use Stripe checkout (Android + Web).
+  bool get usesStripe => platform != BillingPlatform.ios;
+
+    /// Convenience: platform name for the `X-Client-Platform` HTTP header.
   String get headerValue => platform.name; // "ios" | "android" | "web"
 
   @override

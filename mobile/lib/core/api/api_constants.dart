@@ -193,10 +193,15 @@ class ApiConstants {
 
   // ── Subscription & Entitlements (V2) ──────────────────────────────────────
   static const String meEntitlements = '$apiPrefix/me/entitlements';
-  // billingCheckout and billingPortal are intentionally OMITTED from Flutter.
-  // These endpoints may only be called from the web (Next.js) or Android.
-  // iOS must NEVER call POST /billing/checkout or GET /billing/portal.
-  // See BillingContext.canShowCheckout / canShowUpgradeCTA for capability gates.
+
+  // Stripe billing (Android + Web ONLY — guarded by BillingContext.canShowCheckout).
+  // iOS clients calling these receive HTTP 451 from the backend.
+  static const String billingCheckout = '$apiPrefix/billing/checkout';
+  static const String billingPortal = '$apiPrefix/billing/portal';
+
+  // Apple IAP billing (iOS ONLY — backend rejects non-iOS clients with HTTP 403).
+  static const String appleVerify = '$apiPrefix/billing/apple/verify';
+  static const String appleRestore = '$apiPrefix/billing/apple/restore';
 
   // ── Timeouts ──────────────────────────────────────────────────────────────
   static const Duration connectTimeout = Duration(seconds: 10);

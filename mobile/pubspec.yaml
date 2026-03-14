@@ -32,17 +32,23 @@ dependencies:
   # UI helpers
   cupertino_icons: ^1.0.6
 
-  # Sélecteur d'images (photo repas)
+  # Sélecteur d images (photo repas)
   image_picker: ^1.1.2
 
   # Offline & Connectivity — LOT 12
-  connectivity_plus: ^6.0.2               # détection réseau (wifi/mobile/none)
-  flutter_local_notifications: ^17.2.2    # notifications locales planifiées
+  connectivity_plus: ^6.0.2
+  flutter_local_notifications: ^17.2.2
 
   # Computer Vision — LOT 7
-  camera: ^0.10.6                          # stream caméra temps réel
-  google_mlkit_pose_detection: ^0.11.0     # détection squelette on-device
-  permission_handler: ^11.3.0              # permissions caméra runtime
+  camera: ^0.10.6
+  google_mlkit_pose_detection: ^0.11.0
+  permission_handler: ^11.3.0
+
+  # Billing — Multi-provider IAP
+  # iOS: StoreKit 2 via in_app_purchase
+  # Android: Stripe via url_launcher
+  in_app_purchase: ^3.2.0
+  url_launcher: ^6.2.6
 
 dev_dependencies:
   flutter_test:
